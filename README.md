@@ -2330,9 +2330,9 @@ This project was created as a take-home assessment for Spur's Founding Full-Stac
 ## Author
 
 **Your Name**
-- GitHub: [@yourusername](https://github.com/yourusername)
-- Email: your.email@example.com
-- LinkedIn: [Your Profile](https://linkedin.com/in/yourprofile)
+- GitHub: [@Rain-09x16](https://github.com/Rain-09x16)
+- Email: aritrasaha7373@example.com
+- LinkedIn: [Aritra Saha](https://www.linkedin.com/in/aritra-saha-719500319/)
 
 ---
 
