@@ -6,7 +6,7 @@ import ChatInput from './ChatInput';
 
 export default function ChatContainer() {
   return (
-    <div className="flex flex-col h-screen bg-gray-50">
+    <div className="flex flex-col h-screen bg-gradient-to-br from-gray-50 via-gray-100 to-gray-50">
       <ChatHeader />
       <ChatMessages />
       <ChatInput />

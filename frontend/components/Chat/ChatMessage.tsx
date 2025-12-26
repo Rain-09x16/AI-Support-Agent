@@ -20,14 +20,14 @@ export default function ChatMessage({ message }: ChatMessageProps) {
 
   return (
     <div
-      className={`flex w-full mb-4 ${isUser ? 'justify-end' : 'justify-start'}`}
+      className={`flex w-full mb-4 animate-slide-in ${isUser ? 'justify-end' : 'justify-start'}`}
       role="article"
       aria-label={`${message.role} message`}
     >
       <div className={`flex max-w-[85%] sm:max-w-[75%] ${isUser ? 'flex-row-reverse' : 'flex-row'}`}>
         <div
-          className={`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center ${
-            isUser ? 'bg-primary-600 ml-3' : 'bg-gray-300 mr-3'
+          className={`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center shadow-sm ${
+            isUser ? 'bg-gradient-to-br from-primary-600 to-primary-700 ml-3' : 'bg-gradient-to-br from-gray-200 to-gray-300 mr-3'
           }`}
           aria-hidden="true"
         >
@@ -65,10 +65,10 @@ export default function ChatMessage({ message }: ChatMessageProps) {
         </div>
         <div className="flex flex-col">
           <div
-            className={`px-4 py-3 rounded-2xl shadow-sm ${
+            className={`px-4 py-3 rounded-2xl shadow-md ${
               isUser
-                ? 'bg-primary-600 text-white rounded-tr-sm'
-                : 'bg-gray-100 text-gray-900 rounded-tl-sm'
+                ? 'bg-gradient-to-br from-primary-600 to-primary-700 text-white rounded-tr-sm'
+                : 'bg-white border border-gray-200 text-gray-900 rounded-tl-sm'
             }`}
           >
             <p className="text-sm leading-relaxed whitespace-pre-wrap break-words">
@@ -76,7 +76,7 @@ export default function ChatMessage({ message }: ChatMessageProps) {
             </p>
           </div>
           <span
-            className={`text-xs text-gray-500 mt-1 px-1 ${
+            className={`text-xs text-gray-400 mt-1.5 px-1 ${
               isUser ? 'text-right' : 'text-left'
             }`}
           >

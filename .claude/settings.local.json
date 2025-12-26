@@ -6,7 +6,9 @@
       "Skill(backend-development:api-design-principles)",
       "Skill(backend-development:api-design-principles:*)",
       "Skill(llm-application-dev:prompt-engineering-patterns)",
-      "Skill(llm-application-dev:prompt-engineering-patterns:*)"
+      "Skill(llm-application-dev:prompt-engineering-patterns:*)",
+      "Bash(curl:*)",
+      "Bash(claude /plugins marketplace)"
     ]
   }
 }

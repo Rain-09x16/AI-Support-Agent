@@ -1,6 +1,6 @@
 # AI Support Agent - Live Chat
 
-A mini AI support agent for live chat, built for the Spur Founding Full-Stack Engineer take-home assignment.
+A mini AI support agent for live chat.
 
 ## 🚀 Live Demo
 
