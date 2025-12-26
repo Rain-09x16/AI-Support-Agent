@@ -49,7 +49,9 @@ export class LLMServiceError extends AppError {
 
 export class DatabaseError extends AppError {
   constructor(message: string, originalError?: any) {
-    super(503, 'Database operation failed', true, {
+    // In production, don't expose internal error details
+    const isProduction = process.env.NODE_ENV === 'production';
+    super(503, 'Database operation failed', true, isProduction ? undefined : {
       message,
       originalError: originalError?.message,
     });

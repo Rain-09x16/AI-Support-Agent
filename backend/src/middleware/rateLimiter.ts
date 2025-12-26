@@ -1,14 +1,20 @@
 import rateLimit from 'express-rate-limit';
+import RedisStore from 'rate-limit-redis';
+import { redis } from '../config/redis';
 import { env } from '../config/env';
 import { ErrorResponse } from '../types/api.types';
 
-// Note: Using in-memory rate limiting for assessment.
-// For production, configure Redis-backed rate limiting.
+// Redis-backed rate limiting for production (persists across restarts and multiple instances)
 export const chatRateLimiter = rateLimit({
   windowMs: env.RATE_LIMIT_WINDOW_MS,
   max: env.RATE_LIMIT_MAX_REQUESTS,
   standardHeaders: true,
   legacyHeaders: false,
+  store: new RedisStore({
+    // @ts-expect-error - Redis client type compatibility
+    sendCommand: (...args: string[]) => redis.call(...args),
+    prefix: 'rl:chat:',
+  }),
   handler: (req, res) => {
     const retryAfter = Math.ceil(env.RATE_LIMIT_WINDOW_MS / 1000);
 
@@ -36,6 +42,11 @@ export const chatRateLimiterHourly = rateLimit({
   max: env.RATE_LIMIT_HOURLY_MAX,
   standardHeaders: true,
   legacyHeaders: false,
+  store: new RedisStore({
+    // @ts-expect-error - Redis client type compatibility
+    sendCommand: (...args: string[]) => redis.call(...args),
+    prefix: 'rl:hourly:',
+  }),
   handler: (req, res) => {
     const retryAfter = 3600;
 
@@ -63,6 +74,11 @@ export const healthRateLimiter = rateLimit({
   max: 60,
   standardHeaders: true,
   legacyHeaders: false,
+  store: new RedisStore({
+    // @ts-expect-error - Redis client type compatibility
+    sendCommand: (...args: string[]) => redis.call(...args),
+    prefix: 'rl:health:',
+  }),
   skip: (req) => {
     return env.NODE_ENV === 'test';
   },

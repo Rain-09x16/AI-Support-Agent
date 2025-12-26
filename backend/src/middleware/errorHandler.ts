@@ -62,6 +62,8 @@ export function errorHandler(
     message: env.NODE_ENV === 'production'
       ? 'An unexpected error occurred'
       : error.message,
+    // Only expose stack trace in development
+    ...(env.NODE_ENV !== 'production' && { stack: error.stack }),
     timestamp: new Date().toISOString(),
     path: req.path,
   };
