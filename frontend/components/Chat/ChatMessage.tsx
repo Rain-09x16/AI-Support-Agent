@@ -108,16 +108,40 @@ export default function ChatMessage({ message }: ChatMessageProps) {
                   ul: ({ children }) => <ul className="list-disc list-inside mb-2 space-y-1">{children}</ul>,
                   ol: ({ children }) => <ol className="list-decimal list-inside mb-2 space-y-1">{children}</ol>,
                   li: ({ children }) => <li className="ml-2">{children}</li>,
-                  a: ({ children, href }) => (
-                    <a
-                      href={href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="underline hover:no-underline font-medium"
-                    >
-                      {children}
-                    </a>
-                  ),
+                  a: ({ children, href }) => {
+                    const isSafe = (rawHref?: string | null) => {
+                      if (!rawHref) return false;
+                      const href = rawHref.trim();
+                      // disallow dangerous schemes
+                      const lower = href.toLowerCase();
+                      if (lower.startsWith('javascript:') || lower.startsWith('data:') || lower.startsWith('vbscript:')) {
+                        return false;
+                      }
+                      // allow explicit safe protocols
+                      if (/^[a-zA-Z][a-zA-Z0-9+.-]*:/.test(href)) {
+                        const proto = href.split(':')[0].toLowerCase();
+                        return proto === 'http' || proto === 'https' || proto === 'mailto';
+                      }
+                      // relative or hash links are allowed
+                      return href.startsWith('/') || href.startsWith('#') || href.startsWith('./') || href.startsWith('../');
+                    };
+
+                    if (isSafe(href)) {
+                      return (
+                        <a
+                          href={href || undefined}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="underline hover:no-underline font-medium"
+                        >
+                          {children}
+                        </a>
+                      );
+                    }
+
+                    // Render non-clickable text for unsafe or missing hrefs
+                    return <span className="underline font-medium cursor-not-allowed">{children}</span>;
+                  },
                   blockquote: ({ children }) => (
                     <blockquote className="border-l-4 border-accent-primary pl-3 py-1 my-2 italic">
                       {children}
