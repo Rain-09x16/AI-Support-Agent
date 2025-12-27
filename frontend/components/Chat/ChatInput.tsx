@@ -50,6 +50,18 @@ export default function ChatInput() {
     setInput(e.target.value);
   };
 
+  const handlePaste = (e: React.ClipboardEvent<HTMLTextAreaElement>) => {
+    const paste = e.clipboardData.getData('text') || '';
+    const allowed = 2000 - input.length;
+    if (paste.length > allowed) {
+      e.preventDefault();
+      if (allowed > 0) {
+        const truncated = paste.slice(0, allowed);
+        setInput((prev) => prev + truncated);
+      }
+    }
+  };
+
   return (
     <div className="border-t-2 border-border-default bg-surface-default relative flex-shrink-0">
       {/* Top accent gradient */}
@@ -125,8 +137,10 @@ export default function ChatInput() {
               ref={textareaRef}
               id="message-input"
               rows={1}
+              maxLength={2000}
               value={input}
               onChange={handleChange}
+              onPaste={handlePaste}
               onKeyDown={handleKeyDown}
               disabled={isLoading}
               placeholder="Type your message..."

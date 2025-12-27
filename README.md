@@ -458,7 +458,7 @@ router.post(
 
 - **Turbopack**: Default bundler (5-10x faster than Webpack)
 - **React 19 Support**: Automatic JSX transform, improved performance
-- **Viewport Configuration**: Separate `viewport` export from `metadata` in layout
+
 
 ---
 
