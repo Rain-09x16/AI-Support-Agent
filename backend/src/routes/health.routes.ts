@@ -1,7 +1,6 @@
 import { Router } from 'express';
 import { db } from '../config/database';
 import { redis } from '../config/redis';
-import { openRouterService } from '../services/llm/openrouterService';
 import { asyncHandler } from '../middleware/errorHandler';
 import { healthRateLimiter } from '../middleware/rateLimiter';
 import { HealthCheckResponse } from '../types/api.types';
@@ -15,7 +14,7 @@ const startTime = Date.now();
 router.get(
   '/',
   healthRateLimiter,
-  asyncHandler(async (req, res) => {
+  asyncHandler(async (_req, res) => {
     const checks = await Promise.all([
       db.healthCheck().catch(() => false),
       redis.healthCheck().catch(() => false),

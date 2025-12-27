@@ -9,7 +9,7 @@ export function errorHandler(
   error: Error | AppError,
   req: Request,
   res: Response,
-  next: NextFunction
+  _next: NextFunction
 ): void {
   if (isAppError(error)) {
     const errorResponse: ErrorResponse = {

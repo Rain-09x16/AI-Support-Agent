@@ -37,7 +37,6 @@ When answering:
 
 export class PromptBuilder {
   private readonly MAX_TOTAL_TOKENS = 4000;
-  private readonly MAX_FAQ_TOKENS = 500;
   private readonly MAX_HISTORY_TOKENS = 1200;
 
   build(

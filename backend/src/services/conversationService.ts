@@ -21,7 +21,7 @@ class ConversationService {
         request.metadata || {}
       );
 
-      const userMessage = await messageModel.create(
+      await messageModel.create(
         conversation.id,
         'user',
         request.message

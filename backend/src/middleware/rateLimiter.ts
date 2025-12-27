@@ -9,7 +9,7 @@ export const chatRateLimiter = rateLimit({
   max: env.RATE_LIMIT_MAX_REQUESTS,
   standardHeaders: true,
   legacyHeaders: false,
-  handler: (req, res) => {
+  handler: (_req, res) => {
     const retryAfter = Math.ceil(env.RATE_LIMIT_WINDOW_MS / 1000);
 
     const errorResponse: ErrorResponse = {
@@ -21,12 +21,12 @@ export const chatRateLimiter = rateLimit({
         window: '1 minute',
       },
       timestamp: new Date().toISOString(),
-      path: req.path,
+      path: _req.path,
     };
 
     res.status(429).json(errorResponse);
   },
-  skip: (req) => {
+  skip: (_req) => {
     return env.NODE_ENV === 'test';
   },
 });
@@ -36,7 +36,7 @@ export const chatRateLimiterHourly = rateLimit({
   max: env.RATE_LIMIT_HOURLY_MAX,
   standardHeaders: true,
   legacyHeaders: false,
-  handler: (req, res) => {
+  handler: (_req, res) => {
     const retryAfter = 3600;
 
     const errorResponse: ErrorResponse = {
@@ -48,12 +48,12 @@ export const chatRateLimiterHourly = rateLimit({
         window: '1 hour',
       },
       timestamp: new Date().toISOString(),
-      path: req.path,
+      path: _req.path,
     };
 
     res.status(429).json(errorResponse);
   },
-  skip: (req) => {
+  skip: (_req) => {
     return env.NODE_ENV === 'test';
   },
 });
@@ -63,7 +63,7 @@ export const healthRateLimiter = rateLimit({
   max: 60,
   standardHeaders: true,
   legacyHeaders: false,
-  skip: (req) => {
+  skip: (_req) => {
     return env.NODE_ENV === 'test';
   },
 });

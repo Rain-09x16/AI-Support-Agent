@@ -58,7 +58,7 @@ export function createApp(): Application {
     next();
   });
 
-  app.get('/', (req, res) => {
+  app.get('/', (_req, res) => {
     res.json({
       name: 'AI Support Agent API',
       version: env.API_VERSION,

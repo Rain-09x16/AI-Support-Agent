@@ -5,7 +5,6 @@ import { logger } from '../utils/logger';
 
 class CacheService {
   private readonly FAQ_PREFIX = 'faq:';
-  private readonly CONVERSATION_PREFIX = 'conversation:';
   private readonly MESSAGE_HISTORY_PREFIX = 'messages:';
 
   async cacheFAQs(userMessage: string, faqs: FAQ[]): Promise<void> {

@@ -1,4 +1,3 @@
-import { v4 as uuidv4 } from 'uuid';
 import { db } from '../config/database';
 import { Conversation, ConversationWithCount } from '../types/db.types';
 import { DatabaseError, NotFoundError } from '../utils/errors';
