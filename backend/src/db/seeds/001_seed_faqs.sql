@@ -3,10 +3,11 @@
 -- Author: AI Support Agent
 -- Date: 2025-12-24
 
--- Clear existing FAQs (for development only - remove in production)
--- TRUNCATE faqs CASCADE;
-
-INSERT INTO faqs (question, answer, category, keywords, priority) VALUES
+-- Only seed if FAQs table is empty (idempotent)
+DO $$
+BEGIN
+  IF NOT EXISTS (SELECT 1 FROM faqs LIMIT 1) THEN
+    INSERT INTO faqs (question, answer, category, keywords, priority) VALUES
 
 -- Account Management (High Priority)
 ('How do I reset my password?',
@@ -110,5 +111,11 @@ INSERT INTO faqs (question, answer, category, keywords, priority) VALUES
  ARRAY['student', 'discount', 'education', 'school', 'university', 'edu'],
  65);
 
--- Update statistics after bulk insert
-ANALYZE faqs;
+    -- Update statistics after bulk insert
+    ANALYZE faqs;
+
+    RAISE NOTICE 'Successfully seeded % FAQs', (SELECT COUNT(*) FROM faqs);
+  ELSE
+    RAISE NOTICE 'FAQs already exist, skipping seed';
+  END IF;
+END $$;

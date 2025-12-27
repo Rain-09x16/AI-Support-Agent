@@ -2,8 +2,6 @@
 
 A production-grade, full-stack AI-powered customer support chat system built with TypeScript, featuring intelligent FAQ retrieval, conversation memory, and resilient LLM integration.
 
-**Live Demo:** [Frontend](https://your-frontend-url.vercel.app) | [API Docs](https://your-backend-url.com/api/v1/health)
-
 ---
 
 ## Executive Summary

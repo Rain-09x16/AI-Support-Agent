@@ -72,3 +72,4 @@ CLAUDE.md
 *.pem
 .cache
 .parcel-cache
+DEPLOYMENT_GUIDE.md
