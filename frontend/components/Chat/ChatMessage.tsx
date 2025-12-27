@@ -111,25 +111,28 @@ export default function ChatMessage({ message }: ChatMessageProps) {
                   a: ({ children, href }) => {
                     const isSafe = (rawHref?: string | null) => {
                       if (!rawHref) return false;
-                      const href = rawHref.trim();
+                      const normalized = rawHref.trim();
                       // disallow dangerous schemes
-                      const lower = href.toLowerCase();
+                      const lower = normalized.toLowerCase();
                       if (lower.startsWith('javascript:') || lower.startsWith('data:') || lower.startsWith('vbscript:')) {
                         return false;
                       }
                       // allow explicit safe protocols
-                      if (/^[a-zA-Z][a-zA-Z0-9+.-]*:/.test(href)) {
-                        const proto = href.split(':')[0].toLowerCase();
+                      if (/^[a-zA-Z][a-zA-Z0-9+.-]*:/.test(normalized)) {
+                        const idx = normalized.indexOf(':');
+                        const proto = idx !== -1 ? normalized.slice(0, idx).toLowerCase() : '';
                         return proto === 'http' || proto === 'https' || proto === 'mailto';
                       }
                       // relative or hash links are allowed
-                      return href.startsWith('/') || href.startsWith('#') || href.startsWith('./') || href.startsWith('../');
+                      return normalized.startsWith('/') || normalized.startsWith('#') || normalized.startsWith('./') || normalized.startsWith('../');
                     };
 
-                    if (isSafe(href)) {
+                    const safeHref = href && isSafe(href) ? href.trim() : null;
+
+                    if (safeHref) {
                       return (
                         <a
-                          href={href || undefined}
+                          href={safeHref}
                           target="_blank"
                           rel="noopener noreferrer"
                           className="underline hover:no-underline font-medium"
