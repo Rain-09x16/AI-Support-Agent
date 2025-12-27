@@ -49,7 +49,7 @@ This application demonstrates a complete AI support agent implementation with:
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
-│                         Frontend (Next.js 14)                    │
+│                         Frontend (Next.js 16)                    │
 │  ┌──────────────┐  ┌──────────────┐  ┌────────────────────┐   │
 │  │  Chat UI     │  │   Zustand    │  │   localStorage     │   │
 │  │  Components  │──│    Store     │──│   Persistence      │   │
@@ -403,7 +403,7 @@ router.post(
 |------------|---------|---------|------------|
 | **Node.js** | 18+ | Runtime | Industry standard, excellent ecosystem |
 | **Express.js** | 4.18 | Web framework | Mature, minimal, well-documented |
-| **TypeScript** | 5.3 | Language | Type safety, better DX, compile-time checks |
+| **TypeScript** | 5.9 | Language | Type safety, better DX, compile-time checks |
 | **PostgreSQL** | 15+ | Primary database | ACID guarantees, powerful full-text search |
 | **Redis** | 7+ | Cache layer | Sub-millisecond latency, simple data structures |
 | **Zod** | 3.22 | Validation | Type inference, composable schemas |
@@ -420,21 +420,45 @@ router.post(
 ### Frontend
 | Technology | Version | Purpose | Why Chosen |
 |------------|---------|---------|------------|
-| **Next.js** | 14.2 | React framework | App Router, RSC, excellent DX |
-| **React** | 18.3 | UI library | Component model, rich ecosystem |
-| **TypeScript** | 5.3 | Language | Type safety across stack |
-| **Zustand** | 4.5 | State management | Minimal boilerplate, hooks-based |
+| **Next.js** | 16.1 | React framework | Turbopack bundler, RSC, excellent DX |
+| **React** | 19.2 | UI library | Component model, rich ecosystem |
+| **TypeScript** | 5.9 | Language | Type safety across stack |
+| **Zustand** | 5.0 | State management | Minimal boilerplate, hooks-based |
 | **Tailwind CSS** | 3.4 | Styling | Utility-first, fast development |
+| **React Markdown** | 10.1 | Markdown rendering | GitHub Flavored Markdown support |
 
 **Why This Stack:**
 - **Zustand over Redux**: Simpler API, less boilerplate, built-in persistence
-- **Next.js App Router**: Server components, streaming, modern React patterns
-- **Tailwind**: Rapid UI development without context switching
+- **Next.js 16 with Turbopack**: 5-10x faster builds, modern React patterns
+- **Tailwind CSS-first**: Modern approach using CSS variables, minimal config
+- **React Markdown**: Rich text formatting for AI responses (bold, lists, code blocks)
 
 ### External Services
 - **OpenRouter**: Unified LLM API access (supports 100+ models)
 - **Render**: PostgreSQL hosting (free tier available)
 - **Upstash**: Redis hosting (serverless, free tier)
+
+### Frontend Configuration Details
+
+**Modern Tailwind CSS Setup:**
+
+- **CSS-First Approach**: All theme configuration lives in [frontend/app/globals.css](frontend/app/globals.css) using CSS custom properties
+- **Minimal Config**: [tailwind.config.js](frontend/tailwind.config.js) (JavaScript, not TypeScript) only defines content paths
+- **Neo-Brutalist Design System**: Custom color palette, brutal shadows, geometric patterns
+- **Benefits**: No TypeScript config needed, easier to maintain, better CSS-JS separation
+
+**Markdown Formatting Support:**
+
+- **react-markdown** with **remark-gfm** for GitHub Flavored Markdown
+- **Supported Formats**: Bold, italic, code blocks, lists, links, blockquotes, headings
+- **Custom Styling**: All markdown elements styled to match neo-brutalist design
+- **Location**: [frontend/components/Chat/ChatMessage.tsx](frontend/components/Chat/ChatMessage.tsx)
+
+**Next.js 16 Features:**
+
+- **Turbopack**: Default bundler (5-10x faster than Webpack)
+- **React 19 Support**: Automatic JSX transform, improved performance
+- **Viewport Configuration**: Separate `viewport` export from `metadata` in layout
 
 ---
 

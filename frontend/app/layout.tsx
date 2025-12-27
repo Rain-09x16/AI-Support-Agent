@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
 
@@ -8,18 +8,19 @@ const inter = Inter({
   variable: '--font-inter',
 });
 
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 1,
+  themeColor: '#2563eb',
+};
+
 export const metadata: Metadata = {
   title: 'AI Support Chat | Your Intelligent Support Assistant',
   description:
     'Get instant support with our AI-powered chat assistant. Fast, reliable, and available 24/7 to help answer your questions.',
   keywords: ['AI', 'support', 'chat', 'assistant', 'customer service'],
   authors: [{ name: 'AI Support Team' }],
-  viewport: {
-    width: 'device-width',
-    initialScale: 1,
-    maximumScale: 1,
-  },
-  themeColor: '#2563eb',
   manifest: '/manifest.json',
   openGraph: {
     title: 'AI Support Chat',
@@ -50,7 +51,7 @@ export default function RootLayout({
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
       </head>
       <body className={`${inter.className} antialiased`}>
-        <main className="h-full">{children}</main>
+        <main className="h-screen w-full overflow-hidden">{children}</main>
       </body>
     </html>
   );
